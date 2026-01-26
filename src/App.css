@@ -387,6 +387,12 @@
   opacity: 0.85;
 }
 
+.feature-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--muted);
+}
+
 .feature-icon-group img {
   width: 28px;
   height: 28px;

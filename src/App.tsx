@@ -1,7 +1,7 @@
 import './App.css'
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Code, Globe } from 'lucide-react'
+import { BellRing, Code, Forklift, GalleryVerticalEnd, Globe } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import dhlLogo from '../carrier-logos/dhl.svg'
 import entregaLogo from '../carrier-logos/entrega.svg'
@@ -45,21 +45,28 @@ const storeLogos: StoreLogo[] = [
   { key: 'marketplace', name: 'Marketplace', Icon: Globe },
 ]
 
-const secondaryFeatures = [
+type FeatureIcon = string | LucideIcon
+
+const secondaryFeatures: Array<{
+  title: string
+  description: string
+  icon: FeatureIcon
+}> = [
   {
-    title: 'Integraciones por API',
-    description: 'Recibe ordenes desde Shopify, WooCommerce o sistemas internos.',
-    icon: fedexLogo,
+    title: 'Solicita Recolecciones',
+    description: 'Solicita recolecciones desde la plataforma.',
+    icon: Forklift,
   },
   {
-    title: 'Alertas inteligentes',
-    description: 'Notifica incidencias y entregas en WhatsApp Business.',
-    icon: dhlLogo,
+    title: 'Notificaciones via WhatsApp & Correo',
+    description: 'Notifica en tiempo real el estatus de envío a tus clientes.',
+    icon: BellRing,
   },
   {
-    title: 'Pagina de rastreo propia',
-    description: 'Tu marca al frente con una experiencia de tracking clara.',
-    icon: upsLogo,
+    title: 'Página de Rastreo Personalizada',
+    description:
+      'Ofrece una mejor experiencia a tus clientes.',
+    icon: GalleryVerticalEnd,
   },
 ]
 
@@ -262,7 +269,11 @@ function App() {
               {secondaryFeatures.map((feature) => (
                 <article className="feature-row" key={feature.title}>
                   <div className="feature-icon">
-                    <img src={feature.icon} alt="" aria-hidden="true" />
+                    {typeof feature.icon === 'string' ? (
+                      <img src={feature.icon} alt="" aria-hidden="true" />
+                    ) : (
+                      <feature.icon aria-hidden="true" />
+                    )}
                   </div>
                   <div>
                     <h3>{feature.title}</h3>
@@ -270,19 +281,6 @@ function App() {
                   </div>
                 </article>
               ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="flow" id="demo">
-        <div className="container">
-          <div className="flow-card">
-            <p className="flow-label">Flujo Turboship</p>
-            <div className="flow-steps">
-              <span>Vende donde quieras</span>
-              <span>Genera etiquetas</span>
-              <span>Seguimiento automatico</span>
             </div>
           </div>
         </div>
