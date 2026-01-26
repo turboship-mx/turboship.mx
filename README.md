@@ -1,5 +1,27 @@
 # React + TypeScript + Vite
 
+## Quick start (Bun)
+
+Install dependencies:
+
+```bash
+bun install
+```
+
+Run the dev server:
+
+```bash
+bun run dev
+```
+
+Other common commands:
+
+```bash
+bun run build
+bun run lint
+bun run preview
+```
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
