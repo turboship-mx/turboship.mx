@@ -28,7 +28,7 @@ const carrierLogos = [
 const highlightFeature = {
   title: 'Shopify, WooCommerce, API',
   description:
-    'No importa si recibes tus pedidos por tiendas en linea o desde un sistema propio, nuestras integraciones se adaptan a tus necesidades y nuestro equipo de expertos buscarán la mejor solución para tu negocio.',
+    'No importa si recibes tus pedidos por tiendas en linea o desde un sistema propio, nuestras integraciones se adaptan a tus necesidades.',
   icons: [shopifyLogo, woocommerceLogo, Code] as const,
 }
 
@@ -59,13 +59,12 @@ const secondaryFeatures: Array<{
   },
   {
     title: 'Notificaciones via WhatsApp & Correo',
-    description: 'Notifica en tiempo real el estatus de envío a tus clientes.',
+    description: 'Tus clientes informados en tiempo real.',
     icon: BellRing,
   },
   {
     title: 'Página de Rastreo Personalizada',
-    description:
-      'Ofrece una mejor experiencia a tus clientes.',
+    description: 'Ofrece una mejor experiencia post venta.',
     icon: GalleryVerticalEnd,
   },
 ]
@@ -127,17 +126,30 @@ function App() {
   }, [])
 
   return (
-    <div className="page">
+    <>
       <header className="hero">
         <div className="container">
           <nav className="nav">
             <span className="brand">
               <img className="brand-logo" src="/logo-light-mode.svg" alt="Turboship.mx" />
             </span>
-            <div className="nav-links">
-              <a href="#producto">Producto</a>
-              <a href="#integraciones">Integraciones</a>
-              <a href="#rastreo">Rastreo</a>
+            <div className="nav-actions">
+              <a
+                className="btn ghost"
+                href="https://app.turboship.mx/auth/signin"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Acceder
+              </a>
+              <a
+                className="btn primary"
+                href="https://app.turboship.mx/auth/signup"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Empezar ahora
+              </a>
             </div>
           </nav>
 
@@ -149,9 +161,21 @@ function App() {
                 friccion operativa.
               </p>
               <div className="hero-actions">
-                <button className="btn primary">Empezar ahora</button>
-                <a className="btn ghost" href="#demo">
-                  Ver demo
+                <a
+                  className="btn primary"
+                  href="https://app.turboship.mx/auth/signup"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Empezar ahora
+                </a>
+                <a
+                  className="btn ghost"
+                  href="https://calendly.com/arturoll-turboship/30min"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Agendar demo
                 </a>
               </div>
               <div className="hero-meta">
@@ -217,126 +241,128 @@ function App() {
         </div>
       </header>
 
-      <section className="logo-strip" id="integraciones">
-        <div className="container">
-          <div className="logo-grid">
-            {carrierLogos.map((logo) => (
-              <img
-                key={logo.name}
-                src={logo.src}
-                alt={`${logo.name} logo`}
-                loading="lazy"
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section" id="producto">
-        <div className="container">
-          <div className="section-heading">
-            <h2>Toda tu operación logística en un solo lugar.</h2>
-            <p>
-              Conecta tus canales de venta con nuestras integraciones o utiliza nuestra API para
-              cotizar, generar y rastrear tus envíos de forma automática.
-            </p>
-          </div>
-          <div className="feature-grid">
-            <article className="feature-card highlight">
-              <div className="feature-icon">
-                <div className="feature-icon-group" aria-hidden="true">
-                  {highlightFeature.icons.map((icon, index) => (
-                    <span className="feature-icon-chip" key={`${highlightFeature.title}-${index}`}>
-                      {typeof icon === 'string' ? (
-                        <img src={icon} alt="" />
-                      ) : (
-                        (() => {
-                          const Icon = icon as LucideIcon
-                          return <Icon aria-hidden="true" />
-                        })()
-                      )}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <h3>{highlightFeature.title}</h3>
-              <p>{highlightFeature.description}</p>
-              <a className="text-link" href="#">
-                Conoce la plataforma
-              </a>
-            </article>
-            <div className="feature-list">
-              {secondaryFeatures.map((feature) => (
-                <article className="feature-row" key={feature.title}>
-                  <div className="feature-icon">
-                    {typeof feature.icon === 'string' ? (
-                      <img src={feature.icon} alt="" aria-hidden="true" />
-                    ) : (
-                      <feature.icon aria-hidden="true" />
-                    )}
-                  </div>
-                  <div>
-                    <h3>{feature.title}</h3>
-                    <p>{feature.description}</p>
-                  </div>
-                </article>
+      <div className="page">
+        <section className="logo-strip" id="integraciones">
+          <div className="container">
+            <div className="logo-grid">
+              {carrierLogos.map((logo) => (
+                <img
+                  key={logo.name}
+                  src={logo.src}
+                  alt={`${logo.name} logo`}
+                  loading="lazy"
+                />
               ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="section" id="rastreo">
-        <div className="container">
-          <div className="tracking-grid">
-            <div>
-              <h2>Seguimiento claro, clientes tranquilos.</h2>
+        <section className="section" id="producto">
+          <div className="container">
+            <div className="section-heading">
+              <h2>Toma el control de tu operación logística.</h2>
               <p>
-                Tu pagina de rastreo con tu logotipo y una interfaz amigable para que tus clientes
-                sigan su envio y reciban ayuda en segundos.
+                Conecta tus canales de venta con nuestras integraciones o utiliza nuestra API para
+                cotizar, generar y rastrear tus envíos de forma automática.
               </p>
-              <a className="text-link" href="#">
-                Ver experiencia de tracking
-              </a>
             </div>
-            <div className="tracking-card">
-              <h3>Notificaciones en tiempo real</h3>
-              <p>
-                Integra WhatsApp Business y envia actualizaciones automaticas ante incidencias o
-                entregas confirmadas.
-              </p>
-              <div className="tracking-icons">
-                <img src={entregaLogo} alt="" aria-hidden="true" />
-                <img src={imileLogo} alt="" aria-hidden="true" />
-                <img src={paquetexpressLogo} alt="" aria-hidden="true" />
+            <div className="feature-grid">
+              <article className="feature-card highlight">
+                <div className="feature-icon">
+                  <div className="feature-icon-group" aria-hidden="true">
+                    {highlightFeature.icons.map((icon, index) => (
+                      <span className="feature-icon-chip" key={`${highlightFeature.title}-${index}`}>
+                        {typeof icon === 'string' ? (
+                          <img src={icon} alt="" />
+                        ) : (
+                          (() => {
+                            const Icon = icon as LucideIcon
+                            return <Icon aria-hidden="true" />
+                          })()
+                        )}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <h3>{highlightFeature.title}</h3>
+                <p>{highlightFeature.description}</p>
+                <a className="text-link" href="#">
+                  Conoce la plataforma
+                </a>
+              </article>
+              <div className="feature-list">
+                {secondaryFeatures.map((feature) => (
+                  <article className="feature-row" key={feature.title}>
+                    <div className="feature-icon">
+                      {typeof feature.icon === 'string' ? (
+                        <img src={feature.icon} alt="" aria-hidden="true" />
+                      ) : (
+                        <feature.icon aria-hidden="true" />
+                      )}
+                    </div>
+                    <div>
+                      <h3>{feature.title}</h3>
+                      <p>{feature.description}</p>
+                    </div>
+                  </article>
+                ))}
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="cta">
-        <div className="container">
-          <div className="cta-card">
-            <h2>Listo para centralizar tu logistica.</h2>
-            <p>
-              Unifica paqueterias, automatiza mensajes y ofrece visibilidad total desde el primer dia.
-            </p>
-            <button className="btn primary">Solicitar acceso</button>
+        <section className="section" id="rastreo">
+          <div className="container">
+            <div className="tracking-grid">
+              <div>
+                <h2>Seguimiento claro, clientes tranquilos.</h2>
+                <p>
+                  Tu pagina de rastreo con tu logotipo y una interfaz amigable para que tus clientes
+                  sigan su envio y reciban ayuda en segundos.
+                </p>
+                <a className="text-link" href="#">
+                  Ver experiencia de tracking
+                </a>
+              </div>
+              <div className="tracking-card">
+                <h3>Notificaciones en tiempo real</h3>
+                <p>
+                  Integra WhatsApp Business y envia actualizaciones automaticas ante incidencias o
+                  entregas confirmadas.
+                </p>
+                <div className="tracking-icons">
+                  <img src={entregaLogo} alt="" aria-hidden="true" />
+                  <img src={imileLogo} alt="" aria-hidden="true" />
+                  <img src={paquetexpressLogo} alt="" aria-hidden="true" />
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <footer className="footer">
-        <div className="container footer-inner">
-          <span>© 2026 Turboship.mx</span>
-          <div>
-            <a href="#">Privacidad</a>
-            <a href="#">Contacto</a>
+        <section className="cta">
+          <div className="container">
+            <div className="cta-card">
+              <h2>Listo para centralizar tu logistica.</h2>
+              <p>
+                Unifica paqueterias, automatiza mensajes y ofrece visibilidad total desde el primer dia.
+              </p>
+              <button className="btn primary">Solicitar acceso</button>
+            </div>
           </div>
-        </div>
-      </footer>
-    </div>
+        </section>
+
+        <footer className="footer">
+          <div className="container footer-inner">
+            <span>© 2026 Turboship.mx</span>
+            <div>
+              <a href="#">Privacidad</a>
+              <a href="#">Contacto</a>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </>
   )
 }
 
