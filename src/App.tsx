@@ -1,6 +1,8 @@
 import './App.css'
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { Code, Globe } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import dhlLogo from '../carrier-logos/dhl.svg'
 import entregaLogo from '../carrier-logos/entrega.svg'
 import estafetaLogo from '../carrier-logos/estafeta.svg'
@@ -9,6 +11,8 @@ import imileLogo from '../carrier-logos/imile.svg'
 import jtExpressLogo from '../carrier-logos/jtexpress.svg'
 import paquetexpressLogo from '../carrier-logos/paquetexpress.svg'
 import upsLogo from '../carrier-logos/ups.svg'
+import shopifyLogo from '../store-logos/shopify.svg'
+import woocommerceLogo from '../store-logos/woocommerce.svg'
 
 const carrierLogos = [
   { name: 'Estafeta', src: estafetaLogo },
@@ -22,11 +26,24 @@ const carrierLogos = [
 ]
 
 const highlightFeature = {
-  title: 'Centraliza envios en un solo dashboard',
+  title: 'Shopify, WooCommerce, API',
   description:
-    'Conecta tus paqueterias, fija tus tarifas y automatiza el tracking desde una plataforma que entiende tu operacion.',
-  icon: estafetaLogo,
+    'No importa si recibes tus pedidos por tiendas en linea o desde un sistema propio, nuestras integraciones se adaptan a tus necesidades y nuestro equipo de expertos buscarán la mejor solución para tu negocio.',
+  icons: [shopifyLogo, woocommerceLogo, Code] as const,
 }
+
+type StoreLogo = {
+  key: 'shopify' | 'woocommerce' | 'marketplace'
+  name: string
+  src?: string
+  Icon?: LucideIcon
+}
+
+const storeLogos: StoreLogo[] = [
+  { key: 'shopify', name: 'Shopify', src: shopifyLogo },
+  { key: 'woocommerce', name: 'WooCommerce', src: woocommerceLogo },
+  { key: 'marketplace', name: 'Marketplace', Icon: Globe },
+]
 
 const secondaryFeatures = [
   {
@@ -49,6 +66,7 @@ const secondaryFeatures = [
 type Shipment = {
   id: string
   carrier: (typeof carrierLogos)[number]
+  store: StoreLogo
   tracking: number
   service: string
 }
@@ -56,14 +74,17 @@ type Shipment = {
 const serviceTypes = ['Terrestre Economico', 'Express Dia Siguiente']
 
 const getRandomCarrier = () => carrierLogos[Math.floor(Math.random() * carrierLogos.length)]
+const getRandomStore = () => storeLogos[Math.floor(Math.random() * storeLogos.length)]
 const getRandomService = () => serviceTypes[Math.floor(Math.random() * serviceTypes.length)]
 
 const createShipment = (): Shipment => {
   const unix = Math.floor(Date.now() / 1000)
+  const store = getRandomStore()
 
   return {
     id: `${unix}-${Math.random().toString(16).slice(2)}`,
     carrier: getRandomCarrier(),
+    store,
     tracking: unix,
     service: getRandomService(),
   }
@@ -151,11 +172,29 @@ function App() {
                         transition={{ duration: 0.35, ease: 'easeOut' }}
                         className="shipment-row"
                       >
-                        <img
-                          className="shipment-logo"
-                          src={shipment.carrier.src}
-                          alt={shipment.carrier.name}
-                        />
+                        <div className="shipment-logos">
+                          {shipment.store.src ? (
+                            <img
+                              className="shipment-logo shipment-store-logo"
+                              src={shipment.store.src}
+                              alt={shipment.store.name}
+                            />
+                          ) : (
+                            <span
+                              className="shipment-logo shipment-store-logo shipment-store-icon"
+                              aria-label={shipment.store.name}
+                            >
+                              {shipment.store.Icon ? (
+                                <shipment.store.Icon aria-hidden="true" />
+                              ) : null}
+                            </span>
+                          )}
+                          <img
+                            className="shipment-logo"
+                            src={shipment.carrier.src}
+                            alt={shipment.carrier.name}
+                          />
+                        </div>
                         <div className="shipment-meta">
                           <span className="shipment-title">{shipment.carrier.name}</span>
                           <span className="shipment-subtitle">{shipment.service}</span>
@@ -189,16 +228,29 @@ function App() {
       <section className="section" id="producto">
         <div className="container">
           <div className="section-heading">
-            <h2>Todo tu envio, orquestado en tiempo real.</h2>
+            <h2>Toda tu operación logística en un solo lugar.</h2>
             <p>
-              Integra canales de venta, genera etiquetas con tarifas propias y asegura seguimiento
-              automatico para cada orden.
+              Conecta tus canales de venta con nuestras integraciones o utiliza nuestra API para
+              cotizar, generar y rastrear tus envíos de forma automática.
             </p>
           </div>
           <div className="feature-grid">
             <article className="feature-card highlight">
               <div className="feature-icon">
-                <img src={highlightFeature.icon} alt="" aria-hidden="true" />
+                <div className="feature-icon-group" aria-hidden="true">
+                  {highlightFeature.icons.map((icon, index) => (
+                    <span className="feature-icon-chip" key={`${highlightFeature.title}-${index}`}>
+                      {typeof icon === 'string' ? (
+                        <img src={icon} alt="" />
+                      ) : (
+                        (() => {
+                          const Icon = icon as LucideIcon
+                          return <Icon aria-hidden="true" />
+                        })()
+                      )}
+                    </span>
+                  ))}
+                </div>
               </div>
               <h3>{highlightFeature.title}</h3>
               <p>{highlightFeature.description}</p>
