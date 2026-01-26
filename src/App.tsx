@@ -1,5 +1,6 @@
 import './App.css'
-import heroImage from '../screenshots/Screenshot 2026-01-24 at 11.49.30.png'
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import dhlLogo from '../carrier-logos/dhl.svg'
 import entregaLogo from '../carrier-logos/entrega.svg'
 import estafetaLogo from '../carrier-logos/estafeta.svg'
@@ -45,7 +46,58 @@ const secondaryFeatures = [
   },
 ]
 
+type Shipment = {
+  id: string
+  carrier: (typeof carrierLogos)[number]
+  tracking: number
+  service: string
+}
+
+const serviceTypes = ['Terrestre Economico', 'Express Dia Siguiente']
+
+const getRandomCarrier = () => carrierLogos[Math.floor(Math.random() * carrierLogos.length)]
+const getRandomService = () => serviceTypes[Math.floor(Math.random() * serviceTypes.length)]
+
+const createShipment = (): Shipment => {
+  const unix = Math.floor(Date.now() / 1000)
+
+  return {
+    id: `${unix}-${Math.random().toString(16).slice(2)}`,
+    carrier: getRandomCarrier(),
+    tracking: unix,
+    service: getRandomService(),
+  }
+}
+
+const createInitialShipments = () => {
+  const count = Math.floor(Math.random() * 3) + 6
+  return Array.from({ length: count }, () => createShipment())
+}
+
 function App() {
+  const [shipments, setShipments] = useState<Shipment[]>(() => createInitialShipments())
+
+  useEffect(() => {
+    let timeoutId = window.setTimeout(() => {})
+    let active = true
+
+    const scheduleNext = () => {
+      const delay = 500 + Math.random() * 3500
+      timeoutId = window.setTimeout(() => {
+        if (!active) return
+        setShipments((prev) => [createShipment(), ...prev].slice(0, 8))
+        scheduleNext()
+      }, delay)
+    }
+
+    scheduleNext()
+
+    return () => {
+      active = false
+      window.clearTimeout(timeoutId)
+    }
+  }, [])
+
   return (
     <div className="page">
       <header className="hero">
@@ -85,8 +137,35 @@ function App() {
                 </div>
               </div>
             </div>
-            <div className="hero-media" aria-hidden="true">
-              <img src={heroImage} alt="Panel de control de Turboship" />
+            <div className="hero-media">
+              <div className="shipments-card">
+                <ul className="shipments-list">
+                  <AnimatePresence initial={false}>
+                    {shipments.map((shipment) => (
+                      <motion.li
+                        key={shipment.id}
+                        layout
+                        initial={{ opacity: 0, y: -18 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 18 }}
+                        transition={{ duration: 0.35, ease: 'easeOut' }}
+                        className="shipment-row"
+                      >
+                        <img
+                          className="shipment-logo"
+                          src={shipment.carrier.src}
+                          alt={shipment.carrier.name}
+                        />
+                        <div className="shipment-meta">
+                          <span className="shipment-title">{shipment.carrier.name}</span>
+                          <span className="shipment-subtitle">{shipment.service}</span>
+                        </div>
+                        <span className="shipment-track">#{shipment.tracking}</span>
+                      </motion.li>
+                    ))}
+                  </AnimatePresence>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
