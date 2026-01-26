@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --page: #f5f7fb;
+  --surface: #eef2f8;
+  --ink: #0f172a;
+  --muted: #4b5563;
+  --accent: #2c7be5;
+  --accent-soft: rgba(44, 123, 229, 0.12);
+  --line: rgba(15, 23, 42, 0.1);
+
+  font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--ink);
+  background-color: var(--page);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(15, 23, 42, 0.035) 0,
+      rgba(15, 23, 42, 0.035) 1px,
+      transparent 1px,
+      transparent 90px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      rgba(15, 23, 42, 0.03) 0,
+      rgba(15, 23, 42, 0.03) 1px,
+      transparent 1px,
+      transparent 90px
+    ),
+    radial-gradient(circle at 10% 10%, rgba(44, 123, 229, 0.08), transparent 45%),
+    radial-gradient(circle at 90% 0%, rgba(15, 23, 42, 0.06), transparent 50%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(245, 247, 251, 0.85)),
+    var(--page);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+p {
+  margin: 0;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
