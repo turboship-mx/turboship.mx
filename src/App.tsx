@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { BellRing, Code, Forklift, GalleryVerticalEnd, Globe } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
+import { getStatusIcon } from './utils/tracking-status'
 import dhlLogo from '../carrier-logos/dhl.svg'
 import entregaLogo from '../carrier-logos/entrega.svg'
 import estafetaLogo from '../carrier-logos/estafeta.svg'
@@ -69,6 +70,13 @@ const secondaryFeatures: Array<{
   },
 ]
 
+const trackingProgress = [
+  { status: 'labelCreated' as const, tone: 'neutral', label: 'Etiqueta creada' },
+  { status: 'pickedUp' as const, tone: 'sky', label: 'Recolección' },
+  { status: 'inTransit' as const, tone: 'blue', label: 'En tránsito' },
+  { status: 'delivered' as const, tone: 'emerald', label: 'Entregado' },
+]
+
 type Shipment = {
   id: string
   carrier: (typeof carrierLogos)[number]
@@ -103,6 +111,10 @@ const createInitialShipments = () => {
 
 function App() {
   const [shipments, setShipments] = useState<Shipment[]>(() => createInitialShipments())
+  const trackingMessage =
+    'Hola, quiero conocer más del rastreador y la experiencia de tracking.'
+  const integrationsMessage =
+    'Hola, quiero conocer más sobre las integraciones de Turboship (Shopify, WooCommerce y API).'
 
   useEffect(() => {
     let timeoutId = window.setTimeout(() => {})
@@ -286,9 +298,19 @@ function App() {
                 </div>
                 <h3>{highlightFeature.title}</h3>
                 <p>{highlightFeature.description}</p>
-                <a className="text-link" href="#">
-                  Conoce la plataforma
-                </a>
+                <button
+                  className="text-link"
+                  type="button"
+                  onClick={() => {
+                    const crisp = (window as Window & { $crisp?: unknown }).$crisp
+                    if (Array.isArray(crisp)) {
+                      crisp.push(['do', 'chat:open'])
+                      crisp.push(['do', 'message:send', ['text', integrationsMessage]])
+                    }
+                  }}
+                >
+                  Conoce nuestras integraciones
+                </button>
               </article>
               <div className="feature-list">
                 {secondaryFeatures.map((feature) => (
@@ -315,14 +337,42 @@ function App() {
           <div className="container">
             <div className="tracking-grid">
               <div>
+                <div className="tracking-progress" aria-hidden="true">
+                  <span className="tracking-progress-line" />
+                  <div className="tracking-progress-steps">
+                    {trackingProgress.map((step, index) => (
+                      <span
+                        key={`${step.status}-${index}`}
+                        className={`tracking-progress-step tracking-progress-${step.tone}`}
+                      >
+                        <span className="tracking-progress-tooltip" role="tooltip">
+                          {step.label}
+                        </span>
+                        <span className="tracking-progress-icon">
+                          {getStatusIcon(step.status, 'tracking-progress-svg')}
+                        </span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
                 <h2>Seguimiento claro, clientes tranquilos.</h2>
                 <p>
-                  Tu pagina de rastreo con tu logotipo y una interfaz amigable para que tus clientes
-                  sigan su envio y reciban ayuda en segundos.
+                  Rastrea todos tus envíos de forma centralizada y ofrece una experiencia agradable
+                  de post venta a tus clientes.
                 </p>
-                <a className="text-link" href="#">
-                  Ver experiencia de tracking
-                </a>
+                <button
+                  className="text-link"
+                  type="button"
+                  onClick={() => {
+                    const crisp = (window as Window & { $crisp?: unknown }).$crisp
+                    if (Array.isArray(crisp)) {
+                      crisp.push(['do', 'chat:open'])
+                      crisp.push(['do', 'message:send', ['text', trackingMessage]])
+                    }
+                  }}
+                >
+                  Conocer más del rastreador
+                </button>
               </div>
               <div className="tracking-card">
                 <h3>Notificaciones en tiempo real</h3>

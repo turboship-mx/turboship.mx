@@ -486,6 +486,111 @@
   color: var(--muted);
 }
 
+.tracking-progress {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.tracking-progress-line {
+  position: absolute;
+  left: 26px;
+  right: 26px;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, rgba(148, 163, 184, 0.5), rgba(59, 130, 246, 0.6), rgba(16, 185, 129, 0.6));
+}
+
+.tracking-progress-steps {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.tracking-progress-step {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+  position: relative;
+}
+
+.tracking-progress-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+}
+
+.tracking-progress-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  background: #0f172a;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 10px;
+  white-space: nowrap;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.22);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.tracking-progress-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: #0f172a transparent transparent transparent;
+}
+
+.tracking-progress-step:hover .tracking-progress-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.tracking-progress-svg {
+  width: 16px;
+  height: 16px;
+}
+
+.tracking-progress-neutral .tracking-progress-icon {
+  background: rgba(148, 163, 184, 0.14);
+  color: #64748b;
+}
+
+.tracking-progress-sky .tracking-progress-icon {
+  background: rgba(14, 165, 233, 0.14);
+  color: #0284c7;
+}
+
+.tracking-progress-blue .tracking-progress-icon {
+  background: rgba(59, 130, 246, 0.14);
+  color: #2563eb;
+}
+
+.tracking-progress-emerald .tracking-progress-icon {
+  background: rgba(16, 185, 129, 0.14);
+  color: #059669;
+}
+
 .tracking-card {
   background: #0f172a;
   color: #fff;
@@ -521,6 +626,11 @@
   font-weight: 600;
   color: var(--accent);
   margin-top: 12px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
 }
 
 .text-link:hover {
@@ -621,6 +731,11 @@
 
   .hero-media {
     padding: 0;
+  }
+
+  .tracking-progress-line {
+    left: 22px;
+    right: 22px;
   }
 }
 
