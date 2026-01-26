@@ -1,5 +1,5 @@
 import './App.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { BellRing, Code, Forklift, GalleryVerticalEnd, Globe } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
@@ -111,10 +111,27 @@ const createInitialShipments = () => {
 
 function App() {
   const [shipments, setShipments] = useState<Shipment[]>(() => createInitialShipments())
-  const trackingMessage =
-    'Hola, quiero conocer más del rastreador y la experiencia de tracking.'
-  const integrationsMessage =
-    'Hola, quiero conocer más sobre las integraciones de Turboship (Shopify, WooCommerce y API).'
+  const heroLogoClicksRef = useRef<Record<string, number[]>>({})
+  const easterEggUrl = 'https://www.youtube.com/watch?v=m39oWoo-JgI'
+  const handleEasterEggClick = (id: string, label: string) => {
+    const now = Date.now()
+    const clicks = heroLogoClicksRef.current[id] ?? []
+    const recentClicks = clicks.filter((timestamp) => now - timestamp <= 3000)
+    recentClicks.push(now)
+    console.log('[hero-easter-egg] click', {
+      id,
+      label,
+      count: recentClicks.length,
+      windowMs: 3000,
+    })
+    if (recentClicks.length >= 10) {
+      heroLogoClicksRef.current[id] = []
+      console.log('[hero-easter-egg] trigger', { id, label })
+      window.open(easterEggUrl, '_blank', 'noopener,noreferrer')
+      return
+    }
+    heroLogoClicksRef.current[id] = recentClicks
+  }
 
   useEffect(() => {
     let timeoutId = window.setTimeout(() => {})
@@ -263,6 +280,7 @@ function App() {
                   src={logo.src}
                   alt={`${logo.name} logo`}
                   loading="lazy"
+                  onClick={() => handleEasterEggClick(`logo-strip-${logo.name}`, logo.name)}
                 />
               ))}
             </div>
@@ -298,19 +316,6 @@ function App() {
                 </div>
                 <h3>{highlightFeature.title}</h3>
                 <p>{highlightFeature.description}</p>
-                <button
-                  className="text-link"
-                  type="button"
-                  onClick={() => {
-                    const crisp = (window as Window & { $crisp?: unknown }).$crisp
-                    if (Array.isArray(crisp)) {
-                      crisp.push(['do', 'chat:open'])
-                      crisp.push(['do', 'message:send', ['text', integrationsMessage]])
-                    }
-                  }}
-                >
-                  Conoce nuestras integraciones
-                </button>
               </article>
               <div className="feature-list">
                 {secondaryFeatures.map((feature) => (
@@ -360,19 +365,6 @@ function App() {
                   Rastrea todos tus envíos de forma centralizada y ofrece una experiencia agradable
                   de post venta a tus clientes.
                 </p>
-                <button
-                  className="text-link"
-                  type="button"
-                  onClick={() => {
-                    const crisp = (window as Window & { $crisp?: unknown }).$crisp
-                    if (Array.isArray(crisp)) {
-                      crisp.push(['do', 'chat:open'])
-                      crisp.push(['do', 'message:send', ['text', trackingMessage]])
-                    }
-                  }}
-                >
-                  Conocer más del rastreador
-                </button>
               </div>
               <div className="tracking-card">
                 <h3>Notificaciones en tiempo real</h3>
