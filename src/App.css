@@ -18,9 +18,17 @@
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
   font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: 0.02em;
+}
+
+.brand-logo {
+  height: 28px;
+  width: auto;
+  display: block;
 }
 
 .nav-links {
@@ -173,35 +181,28 @@
 }
 
 .logo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 16px;
-}
-
-.logo-card {
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 14px 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 62px;
-  background: rgba(255, 255, 255, 0.7);
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  flex-wrap: nowrap;
+  gap: clamp(10px, 2.6vw, 18px);
+  overflow: hidden;
 }
 
-.logo-card img {
-  max-width: 110px;
+.logo-grid img {
+  max-width: 68px;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  overflow: hidden;
   opacity: 0.55;
   filter: grayscale(1);
+  transition: opacity 0.2s ease, filter 0.2s ease;
 }
 
-.logo-card:hover {
-  transform: translateY(-2px);
-}
-
-.logo-card:hover img {
-  opacity: 0.85;
+.logo-grid img:hover {
+  opacity: 0.95;
+  filter: none;
 }
 
 .section {
@@ -471,5 +472,10 @@
 
   .flow-card {
     border-radius: 24px;
+  }
+
+  .logo-grid {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }

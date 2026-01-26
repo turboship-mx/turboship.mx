@@ -51,7 +51,9 @@ function App() {
       <header className="hero">
         <div className="container">
           <nav className="nav">
-            <span className="brand">Turboship.mx</span>
+            <span className="brand">
+              <img className="brand-logo" src="/logo-light-mode.svg" alt="Turboship.mx" />
+            </span>
             <div className="nav-links">
               <a href="#producto">Producto</a>
               <a href="#integraciones">Integraciones</a>
@@ -61,7 +63,6 @@ function App() {
 
           <div className="hero-content">
             <div className="hero-copy">
-              <p className="eyebrow">Plataforma de logistica</p>
               <h1>Envios conectados para marcas que crecen rapido.</h1>
               <p className="lead">
                 Unifica canales, cotiza al instante y entrega experiencias de tracking claras sin
@@ -93,12 +94,14 @@ function App() {
 
       <section className="logo-strip" id="integraciones">
         <div className="container">
-          <p>Integraciones oficiales</p>
           <div className="logo-grid">
             {carrierLogos.map((logo) => (
-              <div className="logo-card" key={logo.name}>
-                <img src={logo.src} alt={`${logo.name} logo`} loading="lazy" />
-              </div>
+              <img
+                key={logo.name}
+                src={logo.src}
+                alt={`${logo.name} logo`}
+                loading="lazy"
+              />
             ))}
           </div>
         </div>
