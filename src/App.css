@@ -525,6 +525,22 @@
   position: relative;
 }
 
+.tracking-progress-step-small {
+  width: 34px;
+  height: 34px;
+}
+
+.tracking-progress-step-small .tracking-progress-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.tracking-progress-step-small .tracking-progress-svg {
+  width: 12px;
+  height: 12px;
+}
+
+
 .tracking-progress-icon {
   width: 32px;
   height: 32px;
@@ -568,8 +584,8 @@
 }
 
 .tracking-progress-svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
 
 .tracking-progress-neutral .tracking-progress-icon {
@@ -600,6 +616,11 @@
 .tracking-progress-emerald .tracking-progress-icon {
   background: rgba(16, 185, 129, 0.14);
   color: #059669;
+}
+
+.tracking-progress-step-muted .tracking-progress-icon {
+  background: transparent;
+  color: #94a3b8;
 }
 
 .tracking-progress-compact {

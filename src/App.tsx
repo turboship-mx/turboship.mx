@@ -1,9 +1,9 @@
 import './App.css'
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { BellRing, Code, Forklift, GalleryVerticalEnd, Globe } from 'lucide-react'
+import { BellRing, Code, Forklift, GalleryVerticalEnd, Globe, MailCheck, MessageCircle } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { getStatusIcon } from './utils/tracking-status'
+import { getStatusIcon, type TrackingStatus } from './utils/tracking-status'
 import dhlLogo from '../carrier-logos/dhl.svg'
 import entregaLogo from '../carrier-logos/entrega.svg'
 import estafetaLogo from '../carrier-logos/estafeta.svg'
@@ -70,11 +70,31 @@ const secondaryFeatures: Array<{
     },
   ]
 
-const trackingProgress = [
-  { status: 'labelCreated' as const, tone: 'neutral', label: 'Etiqueta creada' },
-  { status: 'pickedUp' as const, tone: 'sky', label: 'Recolección' },
-  { status: 'inTransit' as const, tone: 'blue', label: 'En tránsito' },
-  { status: 'delivered' as const, tone: 'emerald', label: 'Entregado' },
+type TrackingProgressStep = {
+  status?: TrackingStatus
+  tone: string
+  label: string
+  icon?: LucideIcon
+  size?: 'small'
+}
+
+const trackingProgress: TrackingProgressStep[] = [
+  { status: 'labelCreated', tone: 'neutral', label: 'Etiqueta creada' },
+  { status: 'pickedUp', tone: 'sky', label: 'Recolección' },
+  { status: 'inTransit', tone: 'blue', label: 'En tránsito' },
+  {
+    icon: MessageCircle,
+    tone: 'sky',
+    label: 'Notificación Automática',
+    size: 'small',
+  },
+  { status: 'delivered', tone: 'emerald', label: 'Entregado' },
+  {
+    icon: MailCheck,
+    tone: 'emerald',
+    label: 'Notificación Automática',
+    size: 'small',
+  },
 ]
 
 const trackingCardProgress = [
@@ -346,14 +366,22 @@ function App() {
                   <div className="tracking-progress-steps">
                     {trackingProgress.map((step, index) => (
                       <span
-                        key={`${step.status}-${index}`}
-                        className={`tracking-progress-step tracking-progress-${step.tone}`}
+                        key={`${step.label}-${index}`}
+                        className={`tracking-progress-step tracking-progress-${step.tone} ${
+                          step.size === 'small'
+                            ? 'tracking-progress-step-small tracking-progress-step-muted'
+                            : ''
+                        }`}
                       >
                         <span className="tracking-progress-tooltip" role="tooltip">
                           {step.label}
                         </span>
                         <span className="tracking-progress-icon">
-                          {getStatusIcon(step.status, 'tracking-progress-svg')}
+                          {step.icon ? (
+                            <step.icon className="tracking-progress-svg" aria-hidden="true" />
+                          ) : (
+                            getStatusIcon(step.status ?? 'unknown', 'tracking-progress-svg')
+                          )}
                         </span>
                       </span>
                     ))}
