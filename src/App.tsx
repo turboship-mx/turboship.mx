@@ -399,11 +399,18 @@ function App() {
         <section className="cta">
           <div className="container">
             <div className="cta-card">
-              <h2>Listo para centralizar tu logistica.</h2>
+              <h2>¿Listo para optimizar tu logística?</h2>
               <p>
-                Unifica paqueterias, automatiza mensajes y ofrece visibilidad total desde el primer dia.
+                Cuéntanos de tu operación y te mostramos por qué Turboship es tu mejor opción.
               </p>
-              <button className="btn primary">Solicitar acceso</button>
+              <a
+                className="btn primary"
+                href="https://calendly.com/arturoll-turboship/30min"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Agendar Demo
+              </a>
             </div>
           </div>
         </section>
