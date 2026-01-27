@@ -1,5 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .incident-border-pulse {
+    animation: incidentBorderPulse 1.6s ease-in-out infinite;
+  }
+}
+
+@keyframes incidentBorderPulse {
+  0%,
+  100% {
+    border-color: rgba(244, 63, 94, 0.2);
+  }
+  50% {
+    border-color: rgba(244, 63, 94, 0.8);
+  }
+}
+
 :root {
   --page: #f5f7fb;
   --surface: #eef2f8;
