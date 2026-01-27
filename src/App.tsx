@@ -428,7 +428,7 @@ function App() {
         <section className="py-[90px] max-[720px]:py-[64px]" id="rastreo">
           <div className="container">
             <div className="grid items-center gap-7 md:grid-cols-2">
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-10">
                 <h2 className="order-1 text-2xl font-semibold md:text-3xl">
                   Seguimiento claro, clientes tranquilos.
                 </h2>
@@ -436,7 +436,7 @@ function App() {
                   Rastrea todos tus envíos de forma centralizada y ofrece una experiencia agradable
                   de post venta a tus clientes.
                 </p>
-                <div className="order-3 pt-6 md:pt-0" aria-hidden="true">
+                <div className="order-3 pt-20 md:pt-0" aria-hidden="true">
                   <div className="relative flex w-full flex-col gap-5 md:gap-4">
                     <span className="absolute left-[22px] top-[18px] bottom-[18px] w-px bg-gradient-to-b from-slate-400/40 via-sky-400/60 to-emerald-400/60 md:left-[22px] md:right-[22px] md:top-1/2 md:bottom-auto md:h-px md:w-auto md:-translate-y-1/2 md:bg-gradient-to-r" />
                     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-0">
@@ -479,14 +479,18 @@ function App() {
                               <span
                                 className={cx(
                                   'text-sm font-semibold text-slate-500 transition-transform duration-200 justify-self-start',
-                                  isActive && 'text-slate-900 font-bold scale-105',
-                                  "md:absolute md:bottom-full md:left-1/2 md:-translate-x-1/2 md:-translate-y-3 md:rounded-lg md:bg-slate-900 md:px-2.5 md:py-1.5 md:text-xs md:text-white md:shadow-lg md:whitespace-nowrap md:transition-all md:after:absolute md:after:left-1/2 md:after:top-full md:after:-translate-x-1/2 md:after:border-[6px] md:after:border-transparent md:after:border-t-slate-900 md:after:content-['']",
+                                  isActive && 'text-slate-900 font-bold',
+                                  "md:absolute md:bottom-full md:left-1/2 md:-translate-x-1/2 md:-translate-y-1 md:rounded-lg md:bg-slate-900 md:px-2.5 md:py-1.5 md:text-xs md:text-white md:shadow-lg md:whitespace-nowrap md:transition-all md:after:absolute md:after:left-1/2 md:after:top-full md:after:-translate-x-1/2 md:after:border-[6px] md:after:border-transparent md:after:border-t-slate-900 md:after:content-['']",
                                   isActive
                                     ? 'md:opacity-100 md:translate-y-0'
                                     : 'md:opacity-0 md:group-hover:opacity-100 md:group-hover:translate-y-0'
                                 )}
                               >
-                                {step.label}
+                                <span
+                                  className={cx('inline-block transition-transform duration-200', isActive && 'scale-105')}
+                                >
+                                  {step.label}
+                                </span>
                               </span>
                             )}
                           </div>
