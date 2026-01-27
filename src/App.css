@@ -827,6 +827,14 @@
 }
 
 @media (max-width: 720px) {
+  .nav-actions {
+    display: none;
+  }
+
+  .brand-logo {
+    height: 40px;
+  }
+
   .nav-links {
     display: none;
   }
