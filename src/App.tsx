@@ -437,9 +437,9 @@ function App() {
                   de post venta a tus clientes.
                 </p>
                 <div className="order-3 pt-6 md:pt-0" aria-hidden="true">
-                  <div className="relative flex w-full flex-col gap-5 md:w-fit md:gap-4">
-                    <span className="absolute left-[22px] top-[18px] bottom-[18px] w-px bg-gradient-to-b from-slate-400/40 via-sky-400/60 to-emerald-400/60 md:left-6 md:right-6 md:top-1/2 md:bottom-auto md:h-px md:w-auto md:-translate-y-1/2 md:bg-gradient-to-r" />
-                    <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-5">
+                  <div className="relative flex w-full flex-col gap-5 md:gap-4">
+                    <span className="absolute left-[22px] top-[18px] bottom-[18px] w-px bg-gradient-to-b from-slate-400/40 via-sky-400/60 to-emerald-400/60 md:left-[22px] md:right-[22px] md:top-1/2 md:bottom-auto md:h-px md:w-auto md:-translate-y-1/2 md:bg-gradient-to-r" />
+                    <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-0">
                       {trackingProgress.map((step, index) => {
                         const isSmall = step.size === 'small'
                         const isActive = index === activeProgressIndex
@@ -451,7 +451,7 @@ function App() {
                         return (
                           <div
                             key={`${step.label}-${index}`}
-                            className="group relative grid grid-cols-[44px_1fr] items-center gap-3 md:flex md:flex-col md:items-center md:gap-2"
+                            className="group relative grid grid-cols-[44px_1fr] items-center gap-3 md:flex md:w-11 md:flex-col md:items-center md:gap-2"
                           >
                             <div
                               className={cx(
@@ -480,7 +480,7 @@ function App() {
                                 className={cx(
                                   'text-sm font-semibold text-slate-500 transition-transform duration-200 justify-self-start',
                                   isActive && 'text-slate-900 font-bold scale-105',
-                                  'md:absolute md:bottom-full md:left-1/2 md:-translate-x-1/2 md:translate-y-2 md:rounded-lg md:bg-slate-900 md:px-2.5 md:py-1.5 md:text-xs md:text-white md:shadow-lg md:whitespace-nowrap md:transition-all',
+                                  "md:absolute md:bottom-full md:left-1/2 md:-translate-x-1/2 md:-translate-y-3 md:rounded-lg md:bg-slate-900 md:px-2.5 md:py-1.5 md:text-xs md:text-white md:shadow-lg md:whitespace-nowrap md:transition-all md:after:absolute md:after:left-1/2 md:after:top-full md:after:-translate-x-1/2 md:after:border-[6px] md:after:border-transparent md:after:border-t-slate-900 md:after:content-['']",
                                   isActive
                                     ? 'md:opacity-100 md:translate-y-0'
                                     : 'md:opacity-0 md:group-hover:opacity-100 md:group-hover:translate-y-0'
