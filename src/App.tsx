@@ -137,6 +137,7 @@ const createInitialShipments = () => {
 
 function App() {
   const [shipments, setShipments] = useState<Shipment[]>(() => createInitialShipments())
+  const [activeProgressIndex, setActiveProgressIndex] = useState(0)
   const heroLogoClicksRef = useRef<Record<string, number[]>>({})
   const easterEggUrl = 'https://www.youtube.com/watch?v=m39oWoo-JgI'
   const handleEasterEggClick = (id: string, label: string) => {
@@ -166,6 +167,31 @@ function App() {
     }
 
     scheduleNext()
+
+    return () => {
+      active = false
+      window.clearTimeout(timeoutId)
+    }
+  }, [])
+
+  useEffect(() => {
+    let timeoutId = window.setTimeout(() => { })
+    let active = true
+
+    const stepCount = trackingProgress.length
+
+    const advance = (index: number) => {
+      if (!active) return
+      setActiveProgressIndex(index)
+      const isLast = index === stepCount - 1
+      const delay = isLast ? 3000 : 800
+      timeoutId = window.setTimeout(() => {
+        if (!active) return
+        advance(isLast ? 0 : index + 1)
+      }, delay)
+    }
+
+    advance(0)
 
     return () => {
       active = false
@@ -371,7 +397,7 @@ function App() {
                           step.size === 'small'
                             ? 'tracking-progress-step-small tracking-progress-step-muted'
                             : ''
-                        }`}
+                        } ${index === activeProgressIndex ? 'tracking-progress-step-active' : ''}`}
                       >
                         <span className="tracking-progress-tooltip" role="tooltip">
                           {step.label}

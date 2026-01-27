@@ -523,6 +523,13 @@
   border: 1px solid var(--line);
   box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
   position: relative;
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+
+.tracking-progress-step-active {
+  transform: scale(1.2);
+  z-index: 2;
 }
 
 .tracking-progress-step-small {
@@ -579,6 +586,11 @@
 }
 
 .tracking-progress-step:hover .tracking-progress-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.tracking-progress-step-active .tracking-progress-tooltip {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
