@@ -386,7 +386,7 @@ function App() {
         <section className="section" id="rastreo">
           <div className="container">
             <div className="tracking-grid">
-              <div>
+              <div className="tracking-copy">
                 <div className="tracking-progress" aria-hidden="true">
                   <span className="tracking-progress-line" />
                   <div className="tracking-progress-steps">

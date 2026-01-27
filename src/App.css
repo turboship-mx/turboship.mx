@@ -114,8 +114,9 @@
 }
 
 .hero-meta {
-  display: flex;
-  gap: 28px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 28px;
   color: var(--muted);
   font-size: 0.85rem;
 }
@@ -554,6 +555,7 @@
   border-radius: 999px;
   display: grid;
   place-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .tracking-progress-tooltip {
@@ -827,12 +829,24 @@
 }
 
 @media (max-width: 720px) {
+  .page {
+    padding: 0 4vw 80px;
+  }
+  .nav {
+    justify-content: center;
+  }
+
+  .hero-copy {
+    text-align: center;
+    align-items: center;
+  }
+
   .nav-actions {
     display: none;
   }
 
   .brand-logo {
-    height: 40px;
+    height: 34px;
   }
 
   .nav-links {
@@ -840,13 +854,69 @@
   }
 
   .hero-actions {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .hero-actions .btn {
+    padding: 10px 16px;
+    font-size: 0.88rem;
   }
 
   .hero-meta {
-    flex-direction: column;
-    gap: 16px;
+    font-size: 0.78rem;
+    gap: 12px 16px;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .hero-content {
+    margin-top: 32px;
+  }
+
+  .hero-meta strong {
+    font-size: 0.92rem;
+  }
+
+  .hero-content {
+    gap: 32px;
+  }
+
+  .logo-strip {
+    padding: 0 0 48px;
+    gap: 12px;
+  }
+
+  .section {
+    padding: 64px 0;
+  }
+
+  .section-heading h2 {
+    font-size: clamp(1.7rem, 6vw, 2.1rem);
+  }
+
+  .feature-grid {
+    margin-top: 24px;
+    gap: 18px;
+  }
+
+  .flow {
+    padding: 10px 0 64px;
+  }
+
+  .tracking-grid {
+    gap: 20px;
+  }
+
+  .cta {
+    padding: 64px 0 32px;
+  }
+
+  .footer {
+    padding: 28px 0 16px;
   }
 
   .flow-card {
@@ -862,9 +932,247 @@
     padding: 0;
   }
 
+  .tracking-progress {
+    width: 100%;
+    align-items: stretch;
+    gap: 18px;
+    position: relative;
+    padding-left: 6px;
+  }
+
   .tracking-progress-line {
     left: 22px;
-    right: 22px;
+    right: auto;
+    top: 22px;
+    bottom: 22px;
+    width: 2px;
+    height: auto;
+    transform: none;
+  }
+
+  .tracking-card .tracking-progress-line {
+    left: 20px;
+  }
+
+  .tracking-progress-steps {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    width: 100%;
+  }
+
+  .tracking-progress-step {
+    width: 100%;
+    height: auto;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    transform: none;
+  }
+
+  .tracking-progress-step-active {
+    transform: none;
+  }
+
+  .tracking-progress-step-active .tracking-progress-icon {
+    transform: scale(1.12);
+    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+  }
+
+  .tracking-card .tracking-progress-step-active .tracking-progress-icon {
+    box-shadow: none;
+  }
+
+  .tracking-progress-step-small .tracking-progress-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .tracking-progress-step-small .tracking-progress-icon::before {
+    inset: -5px;
+  }
+
+  .tracking-progress-step-small .tracking-progress-svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .tracking-progress-icon {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    order: 1;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .tracking-progress-icon::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid var(--line);
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+    z-index: -2;
+  }
+
+  .tracking-progress-tooltip {
+    position: static;
+    transform: none;
+    opacity: 1;
+    background: transparent;
+    color: var(--muted);
+    padding: 0;
+    box-shadow: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    pointer-events: none;
+    order: 2;
+    transition: transform 0.3s ease;
+    transform-origin: left center;
+  }
+
+  .tracking-progress-tooltip::after {
+    content: none;
+  }
+
+  .tracking-progress-step:hover .tracking-progress-tooltip,
+  .tracking-progress-step-active .tracking-progress-tooltip {
+    transform: scale(1.05);
+    color: var(--ink);
+  }
+
+  .tracking-card .tracking-progress-tooltip {
+    color: rgba(255, 255, 255, 0.82);
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .tracking-progress-step-muted .tracking-progress-icon {
+    background: rgba(148, 163, 184, 0.42);
+    color: #64748b;
+  }
+
+  .tracking-progress-neutral .tracking-progress-icon {
+    background: rgba(148, 163, 184, 0.28);
+  }
+
+  .tracking-progress-sky .tracking-progress-icon {
+    background: rgba(14, 165, 233, 0.28);
+  }
+
+  .tracking-progress-blue .tracking-progress-icon {
+    background: rgba(59, 130, 246, 0.28);
+  }
+
+  .tracking-progress-orange .tracking-progress-icon {
+    background: rgba(249, 115, 22, 0.28);
+  }
+
+  .tracking-progress-red .tracking-progress-icon {
+    background: rgba(239, 68, 68, 0.28);
+  }
+
+  .tracking-progress-emerald .tracking-progress-icon {
+    background: rgba(16, 185, 129, 0.28);
+  }
+
+  .tracking-card .tracking-progress-step-muted .tracking-progress-icon {
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .tracking-card .tracking-progress-icon {
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .tracking-card .tracking-progress-icon::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    z-index: 0;
+  }
+
+  .tracking-card .tracking-progress-svg {
+    position: relative;
+    z-index: 1;
+  }
+
+  .tracking-card .tracking-progress-icon::after {
+    background: transparent;
+  }
+
+  .tracking-card .tracking-progress-step-active .tracking-progress-tooltip {
+    color: #fff;
+  }
+
+  .tracking-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tracking-copy h2 {
+    order: 1;
+  }
+
+  .tracking-copy p {
+    order: 2;
+  }
+
+  .tracking-copy .tracking-progress {
+    order: 3;
+    padding-top: 24px;
+  }
+
+  .tracking-card .tracking-progress-icon::before,
+  .tracking-card .tracking-progress-icon::after {
+    content: none;
+  }
+
+  .tracking-card .tracking-progress-icon {
+    width: 24px;
+    height: 24px;
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1f2937;
+    border: 1px solid #334155;
+    box-shadow: none;
+  }
+
+  .tracking-card .tracking-progress-step {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    align-items: center;
+    gap: 12px;
+    overflow: visible;
+  }
+
+  .tracking-card .tracking-progress-steps {
+    overflow: visible;
+  }
+
+  .tracking-card .tracking-progress-icon::after {
+    width: 16px;
+    height: 16px;
+  }
+
+  .tracking-card .tracking-progress-svg {
+    width: 13px;
+    height: 13px;
   }
 }
 
