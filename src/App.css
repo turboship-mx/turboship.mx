@@ -492,6 +492,7 @@
   flex-direction: column;
   gap: 16px;
   margin-bottom: 18px;
+  width: fit-content;
 }
 
 .tracking-progress-line {
@@ -586,9 +587,96 @@
   color: #2563eb;
 }
 
+.tracking-progress-orange .tracking-progress-icon {
+  background: rgba(249, 115, 22, 0.14);
+  color: #ea580c;
+}
+
+.tracking-progress-red .tracking-progress-icon {
+  background: rgba(239, 68, 68, 0.14);
+  color: #dc2626;
+}
+
 .tracking-progress-emerald .tracking-progress-icon {
   background: rgba(16, 185, 129, 0.14);
   color: #059669;
+}
+
+.tracking-progress-compact {
+  margin: 12px 0 10px;
+}
+
+.tracking-progress-compact .tracking-progress-step {
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.2);
+}
+
+.tracking-progress-compact .tracking-progress-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.tracking-card .tracking-progress-line {
+  left: 18px;
+  right: 18px;
+  background: linear-gradient(
+    90deg,
+    rgba(148, 163, 184, 0.4),
+    rgba(59, 130, 246, 0.7),
+    rgba(249, 115, 22, 0.7),
+    rgba(239, 68, 68, 0.7)
+  );
+}
+
+.tracking-card .tracking-progress-step {
+  background: #1f2937;
+  border-color: #334155;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.35);
+}
+
+.tracking-card .tracking-progress-icon {
+  background: #111827;
+}
+
+.tracking-card .tracking-progress-neutral .tracking-progress-icon {
+  color: #e2e8f0;
+}
+
+.tracking-card .tracking-progress-blue .tracking-progress-icon {
+  color: #93c5fd;
+}
+
+.tracking-card .tracking-progress-orange .tracking-progress-icon {
+  color: #fdba74;
+}
+
+.tracking-card .tracking-progress-red .tracking-progress-icon {
+  color: #fca5a5;
+}
+
+.tracking-card .tracking-progress-alert {
+  animation: pulseAlert 1.6s ease-in-out infinite;
+}
+
+@keyframes pulseAlert {
+  0%,
+  100% {
+    background: #1f2937;
+  }
+  50% {
+    background: #7f1d1d;
+  }
+}
+
+.tracking-card .tracking-progress-tooltip {
+  background: #fff;
+  color: #0f172a;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.35);
+}
+
+.tracking-card .tracking-progress-tooltip::after {
+  border-color: #fff transparent transparent transparent;
 }
 
 .tracking-card {

@@ -53,28 +53,34 @@ const secondaryFeatures: Array<{
   description: string
   icon: FeatureIcon
 }> = [
-  {
-    title: 'Solicita Recolecciones',
-    description: 'Solicita recolecciones desde la plataforma.',
-    icon: Forklift,
-  },
-  {
-    title: 'Notificaciones via WhatsApp & Correo',
-    description: 'Tus clientes informados en tiempo real.',
-    icon: BellRing,
-  },
-  {
-    title: 'Página de Rastreo Personalizada',
-    description: 'Ofrece una mejor experiencia post venta.',
-    icon: GalleryVerticalEnd,
-  },
-]
+    {
+      title: 'Solicita Recolecciones',
+      description: 'Solicita recolecciones desde la plataforma.',
+      icon: Forklift,
+    },
+    {
+      title: 'Notificaciones via WhatsApp & Correo',
+      description: 'Tus clientes informados en tiempo real.',
+      icon: BellRing,
+    },
+    {
+      title: 'Página de Rastreo Personalizada',
+      description: 'Ofrece una mejor experiencia post venta.',
+      icon: GalleryVerticalEnd,
+    },
+  ]
 
 const trackingProgress = [
   { status: 'labelCreated' as const, tone: 'neutral', label: 'Etiqueta creada' },
   { status: 'pickedUp' as const, tone: 'sky', label: 'Recolección' },
   { status: 'inTransit' as const, tone: 'blue', label: 'En tránsito' },
   { status: 'delivered' as const, tone: 'emerald', label: 'Entregado' },
+]
+
+const trackingCardProgress = [
+  { status: 'inTransit' as const, tone: 'blue', label: 'En tránsito' },
+  { status: 'attemptedDelivery' as const, tone: 'orange', label: 'Intento de entrega' },
+  { status: 'exception' as const, tone: 'red', label: 'Incidencia' },
 ]
 
 type Shipment = {
@@ -118,15 +124,8 @@ function App() {
     const clicks = heroLogoClicksRef.current[id] ?? []
     const recentClicks = clicks.filter((timestamp) => now - timestamp <= 3000)
     recentClicks.push(now)
-    console.log('[hero-easter-egg] click', {
-      id,
-      label,
-      count: recentClicks.length,
-      windowMs: 3000,
-    })
     if (recentClicks.length >= 10) {
       heroLogoClicksRef.current[id] = []
-      console.log('[hero-easter-egg] trigger', { id, label })
       window.open(easterEggUrl, '_blank', 'noopener,noreferrer')
       return
     }
@@ -134,7 +133,7 @@ function App() {
   }
 
   useEffect(() => {
-    let timeoutId = window.setTimeout(() => {})
+    let timeoutId = window.setTimeout(() => { })
     let active = true
 
     const scheduleNext = () => {
@@ -184,10 +183,10 @@ function App() {
 
           <div className="hero-content">
             <div className="hero-copy">
-              <h1>Envios conectados para marcas que crecen rapido.</h1>
+              <h1>De venta a entrega con la mejor experiencia.</h1>
               <p className="lead">
-                Unifica canales, cotiza al instante y entrega experiencias de tracking claras sin
-                friccion operativa.
+                Turboship centraliza tus canales de venta y proveedores de envíos con el fin de mejorar la experiencia
+                de entrega de tu negocio, incrementes tus clientes recurrentes y tomes control de tu operación.
               </p>
               <div className="hero-actions">
                 <a
@@ -367,16 +366,31 @@ function App() {
                 </p>
               </div>
               <div className="tracking-card">
-                <h3>Notificaciones en tiempo real</h3>
-                <p>
-                  Integra WhatsApp Business y envia actualizaciones automaticas ante incidencias o
-                  entregas confirmadas.
-                </p>
-                <div className="tracking-icons">
-                  <img src={entregaLogo} alt="" aria-hidden="true" />
-                  <img src={imileLogo} alt="" aria-hidden="true" />
-                  <img src={paquetexpressLogo} alt="" aria-hidden="true" />
+                <h3>Entérate de incidencias antes que tus clientes</h3>
+                <div className="tracking-progress tracking-progress-compact" aria-hidden="true">
+                  <span className="tracking-progress-line" />
+                  <div className="tracking-progress-steps">
+                    {trackingCardProgress.map((step, index) => (
+                      <span
+                        key={`${step.status}-${index}`}
+                        className={`tracking-progress-step tracking-progress-${step.tone} ${
+                          index === 2 ? 'tracking-progress-alert' : ''
+                        }`}
+                      >
+                        <span className="tracking-progress-tooltip" role="tooltip">
+                          {step.label}
+                        </span>
+                        <span className="tracking-progress-icon">
+                          {getStatusIcon(step.status, 'tracking-progress-svg')}
+                        </span>
+                      </span>
+                    ))}
+                  </div>
                 </div>
+                <p>
+                  Nuestro rastreador opera 24/7. Recibe alertas cuando un envío tuvo problemas en
+                  tránsito o si no han logrado concretar la entrega.
+                </p>
               </div>
             </div>
           </div>
