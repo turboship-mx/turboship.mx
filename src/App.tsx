@@ -258,7 +258,7 @@ function App() {
 
           <div className="mt-16 grid items-center gap-[clamp(2rem,6vw,5rem)] [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))] max-[1024px]:grid-cols-1 max-[720px]:mt-8 max-[720px]:gap-8">
              <div className="flex max-w-[540px] flex-col gap-6 animate-[fadeIn_0.8s_ease_forwards] max-[720px]:items-center max-[720px]:text-center">
-               <h1 className="m-0 pt-6 text-[clamp(2.7rem,4.6vw,4.2rem)] leading-[1.05]">
+                <h1 className="m-0 pt-6 text-[clamp(2.7rem,4.6vw,4.2rem)] leading-[1.05] max-[720px]:pt-3">
                  De venta a entrega con la mejor experiencia.
                </h1>
               <p className="m-0 text-[1.05rem] text-[var(--muted)]">
@@ -296,7 +296,7 @@ function App() {
             </div>
             <div className="relative flex min-h-[360px] overflow-hidden p-[26px] [border-radius:0] [background:transparent] [box-shadow:none] [border:none] isolation-isolate max-[720px]:p-0">
               <div className="relative z-[1] mx-auto flex w-full max-w-[600px] flex-col gap-5">
-                <ul className="m-0 flex max-h-[320px] list-none flex-col gap-3 p-0">
+                <ul className="m-0 flex max-h-[410px] list-none flex-col gap-3 p-0">
                   <AnimatePresence initial={false}>
                     {shipments.map((shipment) => (
                       <motion.li
@@ -436,7 +436,7 @@ function App() {
                   Rastrea todos tus envíos de forma centralizada y ofrece una experiencia agradable
                   de post venta a tus clientes.
                 </p>
-                <div className="order-3 pt-20 md:pt-0" aria-hidden="true">
+                <div className="order-3 pt-20 md:pt-0 max-[720px]:pt-10" aria-hidden="true">
                   <div className="relative flex w-full flex-col gap-5 md:gap-4">
                     <span className="absolute left-[22px] top-[18px] bottom-[18px] w-px bg-gradient-to-b from-slate-400/40 via-sky-400/60 to-emerald-400/60 md:left-[22px] md:right-[22px] md:top-1/2 md:bottom-auto md:h-px md:w-auto md:-translate-y-1/2 md:bg-gradient-to-r" />
                     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-0">
