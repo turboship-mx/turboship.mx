@@ -568,7 +568,7 @@ function App() {
               </div>
             </div>
             <div>
-              <a className="ml-4 text-inherit" href="#">Privacidad</a>
+              <a className="ml-4 text-inherit max-[720px]:ml-0" href="#">Privacidad</a>
               <a className="ml-4 text-inherit" href="#">Contacto</a>
             </div>
           </div>
