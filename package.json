@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "bunx vite",
+    "dev": "bunx vite --host 0.0.0.0",
     "build": "bunx tsc -b && bunx vite build",
     "lint": "bunx eslint .",
     "preview": "bunx vite preview",
