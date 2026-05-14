@@ -101,6 +101,18 @@ const hubNodes: HubNode[] = [
   { label: 'Tienda física', Icon: Store, position: 'top-[18%] left-0 translate-x-0' },
 ]
 
+type HubLogo = {
+  label: string
+  src: string
+  position: string
+}
+
+const hubLogos: HubLogo[] = [
+  { label: 'Envia', src: '/integrations/envia.png', position: 'left-[76%] top-[35%] -translate-x-1/2 -translate-y-1/2' },
+  { label: 'Skydropx', src: '/integrations/skydropx.webp', position: 'left-1/2 top-[80%] -translate-x-1/2 -translate-y-1/2' },
+  { label: 'T1 Envíos', src: '/integrations/t1envios.webp', position: 'left-[24%] top-[35%] -translate-x-1/2 -translate-y-1/2' },
+]
+
 const rateTiers = [
   {
     title: 'Ecommerce',
@@ -511,6 +523,23 @@ export function HomePage() {
                       <node.Icon className="h-3.5 w-3.5" aria-hidden="true" />
                     </span>
                     <span className="text-[0.78rem] font-semibold text-[var(--ink)]">{node.label}</span>
+                  </div>
+                ))}
+                {hubLogos.map((logo) => (
+                  <div
+                    key={logo.label}
+                    className={cx(
+                      'absolute z-[2] grid h-12 w-12 place-items-center overflow-hidden rounded-2xl border border-[var(--line)] bg-white shadow-[0_10px_22px_rgba(15,23,42,0.08)]',
+                      logo.position
+                    )}
+                    title={logo.label}
+                  >
+                    <img
+                      src={logo.src}
+                      alt={logo.label}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
                   </div>
                 ))}
               </div>
